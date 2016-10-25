@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["ComputeVectors",""],["EigenError",""]],"struct":[["Solution","Solution to an eigenvalue problem.."]]});

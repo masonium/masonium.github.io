@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Symmetric","enum for symmetric matrix inputs"]],"fn":[["matrix_with_layout","Return an array with the specified dimensions and layout."],["slice_and_layout_mut","Return true if an array can be used as a matrix input."]]});
