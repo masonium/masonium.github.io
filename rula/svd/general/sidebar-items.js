@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["SVDMethod",""]],"trait":[["SVD",""]]});
+initSidebarItems({"trait":[["SVD",""]]});

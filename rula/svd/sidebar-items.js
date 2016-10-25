@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["general",""],["types",""]]});
+initSidebarItems({"mod":[["general","Solve singular value decomposition (SVD) of arbitrary matrices."],["types",""]]});
