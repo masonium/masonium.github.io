@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["SolveLinear","Implements `compute_*` methods to solve systems of linear equations."]]});

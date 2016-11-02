@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["SVDError","An error resulting from a `SVD::compute*` method."]],"struct":[["SVDSolution","A solution to the singular value decomposition."]],"trait":[["SingularValue","Trait for singular values"]]});

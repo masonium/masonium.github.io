@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["SolveError","Error enum returns by various `SolveLinear`-esque compute methods."]]});

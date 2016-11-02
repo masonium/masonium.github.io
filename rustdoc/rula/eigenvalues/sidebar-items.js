@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["general","Compute eigenvalues and eigenvectors of general, non-symmetric matrices."],["symmetric","Compute eigenvalues and eigenvectors of symmetric matrices."],["types",""]]});

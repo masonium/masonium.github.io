@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["VPTree","Vantage Point Tree"]],"trait":[["MetricItem","Defines a metric for items in a metric space."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["SymmetricSolveLinear","Implements `compute_*` methods to solve systems of linear equations A*X = B, where A is symmetric (for real-valued matrices) or hermitian (for complex-valued matrices."]]});

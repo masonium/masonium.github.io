@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["as_rows","Return the rows of the matrix as a Vec of Vectors."],["remove_diagonal","Given an n✕n matrix,return an n✕(n-1) matrix formed by removing the diagonal elements"]]});

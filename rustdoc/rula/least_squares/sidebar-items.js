@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["LeastSquaresError",""]],"struct":[["LeastSquaresSolution",""]],"trait":[["LeastSquares","Multivariable least squares problem."]]});
