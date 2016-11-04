@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/workspace/linxal/src/types.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/types.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>types.rs.html -- source</title>
@@ -93,6 +93,35 @@
 <span id="49">49</span>
 <span id="50">50</span>
 <span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Globally-used traits, structs, and enums</span>
 
@@ -100,6 +129,7 @@
 <span class='kw'>use</span> <span class='ident'>eigenvalues</span>::<span class='ident'>types</span>::<span class='ident'>EigenError</span>;
 <span class='kw'>use</span> <span class='ident'>solve_linear</span>::<span class='ident'>types</span>::<span class='ident'>SolveError</span>;
 <span class='kw'>use</span> <span class='ident'>least_squares</span>::<span class='ident'>LeastSquaresError</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='ident'>lapack</span>::{<span class='ident'>c32</span>, <span class='ident'>c64</span>};
 
 <span class='doccomment'>/// Enum for symmetric matrix inputs.</span>
 <span class='attribute'>#[<span class='ident'>repr</span>(<span class='ident'>u8</span>)]</span>
@@ -143,6 +173,34 @@
 <span class='kw'>impl</span> <span class='ident'>From</span><span class='op'>&lt;</span><span class='ident'>SolveError</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='ident'>Error</span> {
     <span class='kw'>fn</span> <span class='ident'>from</span>(<span class='ident'>e</span>: <span class='ident'>SolveError</span>) <span class='op'>-&gt;</span> <span class='ident'>Error</span> {
         <span class='ident'>Error</span>::<span class='ident'>SolveLinear</span>(<span class='ident'>e</span>)
+    }
+}
+
+<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Magnitude</span>: <span class='ident'>Copy</span> {
+    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
+}
+
+<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>f32</span> {
+    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='self'>self</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>f64</span>
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>f64</span> {
+    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='self'>self</span>.<span class='ident'>abs</span>()
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>c32</span> {
+    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='self'>self</span>.<span class='ident'>norm</span>() <span class='kw'>as</span> <span class='ident'>f64</span>
+    }
+}
+
+<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>c64</span> {
+    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
+        <span class='self'>self</span>.<span class='ident'>norm</span>()
     }
 }
 </pre>

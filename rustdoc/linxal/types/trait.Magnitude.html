@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="API documentation for the Rust `util` mod in crate `linxal`.">
-    <meta name="keywords" content="rust, rustlang, rust-lang, util">
+    <meta name="description" content="API documentation for the Rust `Magnitude` trait in crate `linxal`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Magnitude">
 
-    <title>linxal::util - Rust</title>
+    <title>linxal::types::Magnitude - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
     <link rel="stylesheet" type="text/css" href="../../main.css">
@@ -28,7 +28,7 @@
 
     <nav class="sidebar">
         
-        <p class='location'><a href='../index.html'>linxal</a></p><script>window.sidebarCurrent = {name: 'util', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script>
+        <p class='location'><a href='../index.html'>linxal</a>::<wbr><a href='index.html'>types</a></p><script>window.sidebarCurrent = {name: 'Magnitude', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
     </nav>
 
     <nav class="sub">
@@ -42,21 +42,27 @@
         </form>
     </nav>
 
-    <section id='main' class="content mod">
-<h1 class='fqn'><span class='in-band'>Module <a href='../index.html'>linxal</a>::<wbr><a class='mod' href=''>util</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content trait">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>linxal</a>::<wbr><a href='index.html'>types</a>::<wbr><a class='trait' href=''>Magnitude</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-7' class='srclink' href='../../src/linxal/util/mod.rs.html#1-4' title='goto source code'>[src]</a></span></h1>
-<h2 id='modules' class='section-header'><a href="#modules">Modules</a></h2>
-<table>
-                       <tr class=' module-item'>
-                           <td><a class='mod' href='internal/index.html'
-                                  title='linxal::util::internal'>internal</a></td>
-                           <td class='docblock short'>
-                                
-                           </td>
-                       </tr></table></section>
+               </span><a id='src-1025' class='srclink' href='../../src/linxal/types.rs.html#54-56' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait Magnitude: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> {
+    fn <a href='#tymethod.mag' class='fnname'>mag</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a>;
+}</pre>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.mag' class='method stab '><code>fn <a href='#tymethod.mag' class='fnname'>mag</a>(self) -&gt; <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a></code></h3></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><code>impl Magnitude for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f32.html'>f32</a></code></li>
+<li><code>impl Magnitude for <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.f64.html'>f64</a></code></li>
+<li><code>impl Magnitude for <a class='type' href='../../linxal/prelude/type.c32.html' title='linxal::prelude::c32'>c32</a></code></li>
+<li><code>impl Magnitude for <a class='type' href='../../linxal/prelude/type.c64.html' title='linxal::prelude::c64'>c64</a></code></li>
+</ul><script type="text/javascript" async
+                         src="../../implementors/linxal/types/trait.Magnitude.js">
+                 </script></section>
     <section id='search' class="content hidden"></section>
 
     <section class="footer"></section>

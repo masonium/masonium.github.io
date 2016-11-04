@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Error","Universal `linxal` error enum"],["Symmetric","Enum for symmetric matrix inputs."]]});
+initSidebarItems({"enum":[["Error","Universal `linxal` error enum"],["Symmetric","Enum for symmetric matrix inputs."]],"trait":[["Magnitude",""]],"type":[["c32",""],["c64",""]]});

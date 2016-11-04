@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["external",""],["internal",""]]});
+initSidebarItems({"mod":[["internal",""]]});

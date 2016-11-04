@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/workspace/linxal/src/svd/mod.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/svd/mod.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>mod.rs.html -- source</title>
@@ -56,6 +56,9 @@
 <span id="12">12</span>
 <span id="13">13</span>
 <span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Solve singular value decomposition problems.</span>
 <span class='doccomment'>//!</span>
@@ -71,6 +74,9 @@
 
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>general</span>;
 <span class='kw'>pub</span> <span class='kw'>mod</span> <span class='ident'>types</span>;
+
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>general</span>::<span class='ident'>SVD</span>;
+<span class='kw'>pub</span> <span class='kw'>use</span> <span class='self'>self</span>::<span class='ident'>types</span>::{<span class='ident'>SVDSolution</span>, <span class='ident'>SVDError</span>, <span class='ident'>SingularValue</span>};
 </pre>
 </section>
     <section id='search' class="content hidden"></section>

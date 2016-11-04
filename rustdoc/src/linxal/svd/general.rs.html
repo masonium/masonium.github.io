@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/workspace/linxal/src/svd/general.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/svd/general.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>general.rs.html -- source</title>
@@ -204,34 +204,34 @@
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>SVD</span><span class='op'>&lt;</span><span class='ident'>SV</span>: <span class='ident'>SingularValue</span><span class='op'>&gt;</span>: <span class='ident'>Sized</span> <span class='op'>+</span> <span class='ident'>Clone</span> {
     <span class='doccomment'>/// Compute the singular value decomposition of a matrix.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// The elements of the input matrix `mat` are modified when this</span>
-    <span class='doccomment'>/// method is called. Use `Self::compute` when you don&#39;t wnat to</span>
-    <span class='doccomment'>/// modify the matrix.</span>
+    <span class='doccomment'>/// Use `Self::compute` when you don&#39;t wnat to consume the input</span>
+    <span class='doccomment'>/// matrix.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// On success, returns an `SVDSolution`, which always contains the</span>
     <span class='doccomment'>/// singular values and optionally contains the left and right</span>
     <span class='doccomment'>/// singular vectors. The left vectors (via the matrix `u`) are</span>
     <span class='doccomment'>/// returned iff `compute_u` is true, and similarly for `vt` and</span>
     <span class='doccomment'>/// `compute_vt`.</span>
-    <span class='kw'>fn</span> <span class='ident'>compute_mut</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>mat</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
-                      <span class='ident'>compute_u</span>: <span class='ident'>bool</span>,
-                      <span class='ident'>compute_vt</span>: <span class='ident'>bool</span>)
+    <span class='kw'>fn</span> <span class='ident'>compute_into</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>mat</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
+                       <span class='ident'>compute_u</span>: <span class='ident'>bool</span>,
+                       <span class='ident'>compute_vt</span>: <span class='ident'>bool</span>)
                       <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>SVDSolution</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='ident'>SV</span><span class='op'>&gt;</span>, <span class='ident'>SVDError</span><span class='op'>&gt;</span>
-        <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>;
+        <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>;
 
     <span class='doccomment'>/// Comptue the singular value decomposition of a matrix.</span>
     <span class='doccomment'>///</span>
-    <span class='doccomment'>/// Similar to [`SVD::compute_mut`](#tymethod.compute_mut), but the values are copied</span>
-    <span class='doccomment'>/// beforehand. leaving the original matrix un-modified.</span>
+    <span class='doccomment'>/// Similar to [`SVD::compute_into`](#tymethod.compute_into), but</span>
+    <span class='doccomment'>/// the values are copied beforehand. leaving the original matrix</span>
+    <span class='doccomment'>/// un-modified.</span>
     <span class='kw'>fn</span> <span class='ident'>compute</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>mat</span>: <span class='kw-2'>&amp;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
                   <span class='ident'>compute_u</span>: <span class='ident'>bool</span>,
                   <span class='ident'>compute_vt</span>: <span class='ident'>bool</span>)
                   <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>SVDSolution</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='ident'>SV</span><span class='op'>&gt;</span>, <span class='ident'>SVDError</span><span class='op'>&gt;</span>
-        <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>
+        <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>Data</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>
     {
         <span class='kw'>let</span> <span class='ident'>vec</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span><span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>mat</span>.<span class='ident'>iter</span>().<span class='ident'>cloned</span>().<span class='ident'>collect</span>();
-        <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='ident'>Array</span>::<span class='ident'>from_shape_vec</span>(<span class='ident'>mat</span>.<span class='ident'>dim</span>(), <span class='ident'>vec</span>).<span class='ident'>unwrap</span>();
-        <span class='self'>Self</span>::<span class='ident'>compute_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>m</span>, <span class='ident'>compute_u</span>, <span class='ident'>compute_vt</span>)
+        <span class='kw'>let</span> <span class='ident'>m</span> <span class='op'>=</span> <span class='ident'>Array</span>::<span class='ident'>from_shape_vec</span>(<span class='ident'>mat</span>.<span class='ident'>dim</span>(), <span class='ident'>vec</span>).<span class='ident'>unwrap</span>();
+        <span class='self'>Self</span>::<span class='ident'>compute_into</span>(<span class='ident'>m</span>, <span class='ident'>compute_u</span>, <span class='ident'>compute_vt</span>)
     }
 }
 
@@ -266,17 +266,17 @@
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>sv_type</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>svd_func</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>sdd_func</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (
         <span class='kw'>impl</span> <span class='ident'>SVD</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>sv_type</span><span class='op'>&gt;</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span> {
 
-            <span class='kw'>fn</span> <span class='ident'>compute_mut</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>mat</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
-                              <span class='kw-2'>mut</span> <span class='ident'>compute_u</span>: <span class='ident'>bool</span>,
-                              <span class='kw-2'>mut</span> <span class='ident'>compute_vt</span>: <span class='ident'>bool</span>)
-                              <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>SVDSolution</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>sv_type</span><span class='op'>&gt;</span>, <span class='ident'>SVDError</span><span class='op'>&gt;</span>
-                <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
+            <span class='kw'>fn</span> <span class='ident'>compute_into</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>mat</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
+                               <span class='kw-2'>mut</span> <span class='ident'>compute_u</span>: <span class='ident'>bool</span>,
+                               <span class='kw-2'>mut</span> <span class='ident'>compute_vt</span>: <span class='ident'>bool</span>)
+                               <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>SVDSolution</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>sv_type</span><span class='op'>&gt;</span>, <span class='ident'>SVDError</span><span class='op'>&gt;</span>
+                <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>{
 
                 <span class='kw'>let</span> <span class='ident'>dim</span> <span class='op'>=</span> <span class='ident'>mat</span>.<span class='ident'>dim</span>();
                 <span class='kw'>let</span> (<span class='ident'>m</span>, <span class='ident'>n</span>) <span class='op'>=</span> <span class='ident'>dim</span>;
                 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>s</span> <span class='op'>=</span> <span class='ident'>Array</span>::<span class='ident'>default</span>(<span class='ident'>cmp</span>::<span class='ident'>min</span>(<span class='ident'>m</span>, <span class='ident'>n</span>));
 
-                <span class='kw'>let</span> (<span class='ident'>slice</span>, <span class='ident'>layout</span>, <span class='ident'>lda</span>) <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>slice_and_layout_mut</span>(<span class='ident'>mat</span>) {
+                <span class='kw'>let</span> (<span class='ident'>slice</span>, <span class='ident'>layout</span>, <span class='ident'>lda</span>) <span class='op'>=</span> <span class='kw'>match</span> <span class='ident'>slice_and_layout_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>mat</span>) {
                     <span class='prelude-val'>Some</span>(<span class='ident'>x</span>) <span class='op'>=&gt;</span> <span class='ident'>x</span>,
                     <span class='prelude-val'>None</span> <span class='op'>=&gt;</span> <span class='kw'>return</span> <span class='prelude-val'>Err</span>(<span class='ident'>SVDError</span>::<span class='ident'>BadLayout</span>)
                 };

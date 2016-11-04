@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/workspace/linxal/src/solve_linear/general.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/solve_linear/general.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>general.rs.html -- source</title>
@@ -157,6 +157,9 @@
 <span id="113">113</span>
 <span id="114">114</span>
 <span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>impl_prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>lapack</span>::<span class='ident'>c</span>::{<span class='ident'>sgesv</span>, <span class='ident'>dgesv</span>, <span class='ident'>cgesv</span>, <span class='ident'>zgesv</span>};
@@ -165,18 +168,21 @@
 <span class='doccomment'>/// Implements `compute_*` methods to solve systems of linear equations.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>SolveLinear</span>: <span class='ident'>Sized</span> <span class='op'>+</span> <span class='ident'>Clone</span> {
     <span class='doccomment'>/// Solve the linear system A * x = B for square matrix `a` and rectangular matrix `b`.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This function is equivalent to solving A * x_i = b_i for each</span>
+    <span class='doccomment'>/// column `b_i` of `b`.</span>
     <span class='kw'>fn</span> <span class='ident'>compute_multi_into</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>D2</span><span class='op'>&gt;</span>(<span class='ident'>a</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
                                   <span class='ident'>b</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>)
                                   <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='ident'>SolveError</span><span class='op'>&gt;</span>
-        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
-              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>;
+        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
+              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>;
 
     <span class='doccomment'>/// Solve the linear system A * x = b for square matrix `a` and column vector `b`.</span>
     <span class='kw'>fn</span> <span class='ident'>compute_into</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>D2</span><span class='op'>&gt;</span>(<span class='ident'>a</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
                             <span class='ident'>b</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>)
                             <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>, <span class='ident'>SolveError</span><span class='op'>&gt;</span>
-        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
-              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>
+        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
+              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>
     {
         <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>b</span>.<span class='ident'>dim</span>();
 
@@ -223,10 +229,10 @@
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_solve_linear</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>: <span class='ident'>ty</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>driver</span>: <span class='ident'>ident</span>) <span class='op'>=&gt;</span> (
         <span class='kw'>impl</span> <span class='ident'>SolveLinear</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span> {
-            <span class='kw'>fn</span> <span class='ident'>compute_multi_into</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>D2</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>a</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='kw-2'>mut</span> <span class='ident'>b</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>) <span class='op'>-&gt;</span>
-                <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='ident'>SolveError</span><span class='op'>&gt;</span>
-
-                <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span>, <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
+            <span class='kw'>fn</span> <span class='ident'>compute_multi_into</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>D2</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>a</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D1</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='kw-2'>mut</span> <span class='ident'>b</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>)
+                                          <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='ident'>SolveError</span><span class='op'>&gt;</span>
+                <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
+                      <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> {
 
                 <span class='comment'>// Make sure the input is square.</span>
                 <span class='kw'>let</span> <span class='ident'>dim</span> <span class='op'>=</span> <span class='ident'>a</span>.<span class='ident'>dim</span>();

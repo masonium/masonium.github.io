@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/workspace/linxal/src/util/external.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/util/external.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>external.rs.html -- source</title>
@@ -69,67 +69,7 @@
 <span id="25">25</span>
 <span id="26">26</span>
 <span id="27">27</span>
-<span id="28">28</span>
-<span id="29">29</span>
-<span id="30">30</span>
-<span id="31">31</span>
-<span id="32">32</span>
-<span id="33">33</span>
-<span id="34">34</span>
-<span id="35">35</span>
-<span id="36">36</span>
-<span id="37">37</span>
-<span id="38">38</span>
-<span id="39">39</span>
-<span id="40">40</span>
-<span id="41">41</span>
-<span id="42">42</span>
-<span id="43">43</span>
-<span id="44">44</span>
-<span id="45">45</span>
-<span id="46">46</span>
-<span id="47">47</span>
-<span id="48">48</span>
-<span id="49">49</span>
-<span id="50">50</span>
-<span id="51">51</span>
-<span id="52">52</span>
-<span id="53">53</span>
-<span id="54">54</span>
-<span id="55">55</span>
-<span id="56">56</span>
-<span id="57">57</span>
 </pre><pre class='rust '>
-<span class='kw'>use</span> <span class='ident'>lapack</span>::{<span class='ident'>c64</span>, <span class='ident'>c32</span>};
-
-<span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Magnitude</span>: <span class='ident'>Copy</span> {
-    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span>;
-}
-
-<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>f32</span> {
-    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
-        <span class='self'>self</span>.<span class='ident'>abs</span>() <span class='kw'>as</span> <span class='ident'>f64</span>
-    }
-}
-
-<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>f64</span> {
-    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
-        <span class='self'>self</span>.<span class='ident'>abs</span>()
-    }
-}
-
-<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>c32</span> {
-    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
-        <span class='self'>self</span>.<span class='ident'>norm</span>() <span class='kw'>as</span> <span class='ident'>f64</span>
-    }
-}
-
-<span class='kw'>impl</span> <span class='ident'>Magnitude</span> <span class='kw'>for</span> <span class='ident'>c64</span> {
-    <span class='kw'>fn</span> <span class='ident'>mag</span>(<span class='self'>self</span>) <span class='op'>-&gt;</span> <span class='ident'>f64</span> {
-        <span class='self'>self</span>.<span class='ident'>norm</span>()
-    }
-}
-
 <span class='doccomment'>/// Assert that two ndarrays are logically equivalent, within</span>
 <span class='doccomment'>/// tolerance.</span>
 <span class='doccomment'>///</span>

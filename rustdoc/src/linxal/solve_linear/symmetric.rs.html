@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/workspace/linxal/src/solve_linear/symmetric.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/solve_linear/symmetric.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>symmetric.rs.html -- source</title>
@@ -168,6 +168,7 @@
 <span id="124">124</span>
 <span id="125">125</span>
 <span id="126">126</span>
+<span id="127">127</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>lapack</span>::<span class='ident'>c</span>::{<span class='ident'>ssysv</span>, <span class='ident'>dsysv</span>, <span class='ident'>chesv</span>, <span class='ident'>zhesv</span>};
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>types</span>::<span class='ident'>SolveError</span>;
@@ -183,8 +184,8 @@
                                   <span class='ident'>uplo</span>: <span class='ident'>Symmetric</span>,
                                   <span class='ident'>b</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>)
                                   <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='ident'>SolveError</span><span class='op'>&gt;</span>
-        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
-              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>;
+        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
+              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>;
 
     <span class='doccomment'>/// Solve the linear system A * x = b for symmetric/hermitian</span>
     <span class='doccomment'>/// square matrix `a` and column vector `b`.</span>
@@ -192,8 +193,8 @@
                             <span class='ident'>uplo</span>: <span class='ident'>Symmetric</span>,
                             <span class='ident'>b</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>)
                             <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>, <span class='ident'>SolveError</span><span class='op'>&gt;</span>
-        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
-              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>
+        <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
+              <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>
     {
         <span class='kw'>let</span> <span class='ident'>n</span> <span class='op'>=</span> <span class='ident'>b</span>.<span class='ident'>dim</span>();
 
@@ -248,9 +249,10 @@
                                           <span class='ident'>uplo</span>: <span class='ident'>Symmetric</span>,
                                           <span class='kw-2'>mut</span> <span class='ident'>b</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>)
                                           <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D2</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='ident'>SolveError</span><span class='op'>&gt;</span>
-                <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span>, <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> {
+                <span class='kw'>where</span> <span class='ident'>D1</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>,
+                      <span class='ident'>D2</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> {
 
-<span class='comment'>// Make sure the input is square.</span>
+                <span class='comment'>// Make sure the input is square.</span>
                 <span class='kw'>let</span> <span class='ident'>dim</span> <span class='op'>=</span> <span class='ident'>a</span>.<span class='ident'>dim</span>();
                 <span class='kw'>let</span> <span class='ident'>b_dim</span> <span class='op'>=</span> <span class='ident'>b</span>.<span class='ident'>dim</span>();
 

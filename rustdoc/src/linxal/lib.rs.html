@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/workspace/linxal/src/lib.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/lib.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>lib.rs.html -- source</title>
@@ -123,6 +123,7 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
+<span id="82">82</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! # Description</span>
 <span class='doccomment'>//!</span>
@@ -171,19 +172,20 @@
 <span class='doccomment'>//! extern crate linxal;</span>
 <span class='doccomment'>//! extern crate ndarray;</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//! use linxal::prelude::*;</span>
-<span class='doccomment'>//! use ndarray::prelude::*;</span>
+<span class='doccomment'>//! use linxal::eigenvalues::{Eigen};</span>
+<span class='doccomment'>//! use linxal::types::{c32, Magnitude};</span>
+<span class='doccomment'>//! use ndarray::{Array, arr1, arr2};</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//! fn main() {</span>
-<span class='doccomment'>//!     let mut m = arr2(&amp;[[1.0 as f32, 2.0],</span>
-<span class='doccomment'>//!                        [-2.0, 1.0]]);</span>
+<span class='doccomment'>//!     let m = arr2(&amp;[[1.0f32, 2.0],</span>
+<span class='doccomment'>//!                    [-2.0, 1.0]]);</span>
 <span class='doccomment'>//!</span>
-<span class='doccomment'>//!     let r = Eigen::compute_mut(&amp;mut m, false, true);</span>
+<span class='doccomment'>//!     let r = Eigen::compute_into(m, false, true);</span>
 <span class='doccomment'>//!     assert!(r.is_ok());</span>
 <span class='doccomment'>//!</span>
 <span class='doccomment'>//!     let r = r.unwrap();</span>
-<span class='doccomment'>//!     let true_evs = Array::from_vec(vec![c32::new(1.0, 2.0), c32::new(1.0, -2.0)]);</span>
-<span class='doccomment'>//!     assert_eq_within_tol!(r.values, true_evs, 0.0001);</span>
+<span class='doccomment'>//!     let true_evs = arr1(&amp;[c32::new(1.0, 2.0), c32::new(1.0, -2.0)]);</span>
+<span class='doccomment'>//!     assert_eq_within_tol!(true_evs, r.values, 0.01);</span>
 <span class='doccomment'>//! }</span>
 <span class='doccomment'>//! ```</span>
 <span class='attribute'>#<span class='op'>!</span>[<span class='ident'>macro_use</span>]</span>
