@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-27648' class='srclink' href='../src/nalgebra/traits/geometry.rs.html#161-167' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-27484' class='srclink' href='../src/nalgebra/traits/geometry.rs.html#161-167' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait RotationMatrix&lt;N,&nbsp;LV:&nbsp;<a class='trait' href='https://doc.rust-lang.org/nightly/core/ops/trait.Mul.html' title='core::ops::Mul'>Mul</a>&lt;Self::Output,&nbsp;Output=LV&gt;,&nbsp;AV&gt;: <a class='trait' href='../nalgebra/trait.Rotation.html' title='nalgebra::Rotation'>Rotation</a>&lt;AV&gt; {
     type <a href='#associatedtype.Output' class='type'>Output</a>: <a class='trait' href='../nalgebra/trait.SquareMatrix.html' title='nalgebra::SquareMatrix'>SquareMatrix</a>&lt;N,&nbsp;LV&gt; + <a class='trait' href='../nalgebra/trait.Rotation.html' title='nalgebra::Rotation'>Rotation</a>&lt;AV&gt;;
     fn <a href='#tymethod.to_rotation_matrix' class='fnname'>to_rotation_matrix</a>(&amp;self) -&gt; Self::Output;
@@ -56,11 +56,11 @@ be implemented by quaternions to convert them to a rotation matrix.</p>
 </div>
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
-        <h3 id='associatedtype.Output' class='method stab '><code>type <a href='#associatedtype.Output' class='type'>Output</a>: <a class='trait' href='../nalgebra/trait.SquareMatrix.html' title='nalgebra::SquareMatrix'>SquareMatrix</a>&lt;N,&nbsp;LV&gt; + <a class='trait' href='../nalgebra/trait.Rotation.html' title='nalgebra::Rotation'>Rotation</a>&lt;AV&gt;</code></h3><div class='docblock'><p>The output rotation matrix type.</p>
+        <h3 id='associatedtype.Output' class='method stab '><span id='Output.t' class='invisible'><code>type <a href='#associatedtype.Output' class='type'>Output</a>: <a class='trait' href='../nalgebra/trait.SquareMatrix.html' title='nalgebra::SquareMatrix'>SquareMatrix</a>&lt;N,&nbsp;LV&gt; + <a class='trait' href='../nalgebra/trait.Rotation.html' title='nalgebra::Rotation'>Rotation</a>&lt;AV&gt;</code></span></h3><div class='docblock'><p>The output rotation matrix type.</p>
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.to_rotation_matrix' class='method stab '><code>fn <a href='#tymethod.to_rotation_matrix' class='fnname'>to_rotation_matrix</a>(&amp;self) -&gt; Self::Output</code></h3><div class='docblock'><p>Gets the rotation matrix represented by <code>self</code>.</p>
+        <h3 id='tymethod.to_rotation_matrix' class='method stab '><span id='to_rotation_matrix.v' class='invisible'><code>fn <a href='#tymethod.to_rotation_matrix' class='fnname'>to_rotation_matrix</a>(&amp;self) -&gt; Self::Output</code></span></h3><div class='docblock'><p>Gets the rotation matrix represented by <code>self</code>.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>

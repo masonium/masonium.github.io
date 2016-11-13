@@ -1,1 +1,1 @@
-initSidebarItems({"type":[["c32",""],["c64",""]]});
+initSidebarItems({"type":[["c32","A complex number with 32-bit parts."],["c64","A complex number with 64-bit parts."]]});

@@ -58,7 +58,7 @@ function (although the final order of <code>array</code> may differ):</p>
 <span class='kw'>fn</span> <span class='ident'>kth_sort</span><span class='op'>&lt;</span><span class='ident'>T</span>: <span class='ident'>Ord</span><span class='op'>&gt;</span>(<span class='ident'>array</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> [<span class='ident'>T</span>], <span class='ident'>k</span>: <span class='ident'>usize</span>) <span class='op'>-&gt;</span> <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>T</span> {
     <span class='ident'>array</span>.<span class='ident'>sort</span>();
     <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>array</span>[<span class='ident'>k</span>]
-}</pre>
+}<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 
 <p>That is, <code>k</code> is zero-indexed, so the minimum corresponds to <code>k = 0</code> and the maximum <code>k = array.len() - 1</code>. Furthermore, <code>array</code> is
 mutated, placing the <code>k</code>th order statistic into <code>array[k]</code> and
@@ -88,7 +88,7 @@ the algorithm SELECT—for finding the *i*th smallest of <em>n</em> elements
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>10</span>, <span class='number'>0</span>, <span class='op'>-</span><span class='number'>10</span>, <span class='number'>20</span>];
 <span class='kw'>let</span> <span class='ident'>kth</span> <span class='op'>=</span> <span class='ident'>order_stat</span>::<span class='ident'>kth</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='number'>2</span>);
 
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>*</span><span class='ident'>kth</span>, <span class='number'>10</span>);</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>*</span><span class='ident'>kth</span>, <span class='number'>10</span>);<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 
 <p>If the order of the original array, or position of the element is
 important, one can collect references to a temporary before querying.</p>
@@ -107,7 +107,7 @@ important, one can collect references to a temporary before querying.</p>
 <span class='kw'>let</span> <span class='ident'>index</span> <span class='op'>=</span> (<span class='ident'>kth</span> <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _ <span class='kw'>as</span> <span class='ident'>usize</span> <span class='op'>-</span> <span class='kw-2'>&amp;</span><span class='ident'>v</span>[<span class='number'>0</span>] <span class='kw'>as</span> <span class='op'>*</span><span class='kw'>const</span> _ <span class='kw'>as</span> <span class='ident'>usize</span>) <span class='op'>/</span> <span class='ident'>mem</span>::<span class='ident'>size_of_val</span>(<span class='kw-2'>&amp;</span><span class='ident'>v</span>[<span class='number'>0</span>]);
 
 <span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='op'>*</span><span class='ident'>kth</span>, <span class='number'>10</span>);
-<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>index</span>, <span class='number'>0</span>);</pre>
+<span class='macro'>assert_eq</span><span class='macro'>!</span>(<span class='ident'>index</span>, <span class='number'>0</span>);<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 </div></section>
     <section id='search' class="content hidden"></section>
 

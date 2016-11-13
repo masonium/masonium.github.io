@@ -71,7 +71,7 @@ order-stat = &quot;0.1&quot;
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>4</span>, <span class='number'>1</span>, <span class='number'>3</span>, <span class='number'>2</span>, <span class='number'>0</span>];
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the 2nd smallest element is {}&quot;</span>, <span class='comment'>// 1</span>
-         <span class='ident'>order_stat</span>::<span class='ident'>kth</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='number'>1</span>));</pre>
+         <span class='ident'>order_stat</span>::<span class='ident'>kth</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='number'>1</span>));<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 
 <p>The <code>kth_by</code> function takes an arbitrary closure, designed for
 order statistics of slices of floating point and more general
@@ -81,7 +81,7 @@ comparisons.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>4.0</span>, <span class='number'>1.0</span>, <span class='number'>3.0</span>, <span class='number'>2.0</span>, <span class='number'>0.0</span>];
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the 3rd smallest element is {}&quot;</span>, <span class='comment'>// 2</span>
-         <span class='ident'>order_stat</span>::<span class='ident'>kth_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='number'>2</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>partial_cmp</span>(<span class='ident'>y</span>).<span class='ident'>unwrap</span>()));</pre>
+         <span class='ident'>order_stat</span>::<span class='ident'>kth_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='number'>2</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>partial_cmp</span>(<span class='ident'>y</span>).<span class='ident'>unwrap</span>()));<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 
 <pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -90,7 +90,7 @@ comparisons.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='ident'>Foo</span>(<span class='number'>4</span>), <span class='ident'>Foo</span>(<span class='number'>1</span>), <span class='ident'>Foo</span>(<span class='number'>3</span>), <span class='ident'>Foo</span>(<span class='number'>2</span>), <span class='ident'>Foo</span>(<span class='number'>0</span>)];
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;the element with the 4th smallest field is {:?}&quot;</span>, <span class='comment'>// Foo(3)</span>
-         <span class='ident'>order_stat</span>::<span class='ident'>kth_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='number'>3</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='number'>0</span>.<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='ident'>y</span>.<span class='number'>0</span>)));</pre>
+         <span class='ident'>order_stat</span>::<span class='ident'>kth_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='number'>3</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='number'>0</span>.<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='ident'>y</span>.<span class='number'>0</span>)));<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 
 <p>The <code>median_of_medians</code> function gives an approximation to the
 median of a slice of an <code>Ord</code> type.</p>
@@ -99,7 +99,7 @@ median of a slice of an <code>Ord</code> type.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>4</span>, <span class='number'>1</span>, <span class='number'>3</span>, <span class='number'>2</span>, <span class='number'>0</span>];
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} is close to the median&quot;</span>,
-         <span class='ident'>order_stat</span>::<span class='ident'>median_of_medians</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>).<span class='number'>1</span>);</pre>
+         <span class='ident'>order_stat</span>::<span class='ident'>median_of_medians</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>).<span class='number'>1</span>);<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 
 <p>It also has a <code>median_of_medians_by</code> variant to work with
 non-<code>Ord</code> types and more general comparisons.</p>
@@ -108,7 +108,7 @@ non-<code>Ord</code> types and more general comparisons.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='number'>4.0</span>, <span class='number'>1.0</span>, <span class='number'>3.0</span>, <span class='number'>2.0</span>, <span class='number'>0.0</span>];
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{} is close to the median&quot;</span>,
-        <span class='ident'>order_stat</span>::<span class='ident'>median_of_medians_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>partial_cmp</span>(<span class='ident'>y</span>).<span class='ident'>unwrap</span>()).<span class='number'>1</span>);</pre>
+        <span class='ident'>order_stat</span>::<span class='ident'>median_of_medians_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='ident'>partial_cmp</span>(<span class='ident'>y</span>).<span class='ident'>unwrap</span>()).<span class='number'>1</span>);<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 
 <pre class='rust rust-example-rendered'>
 <span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
@@ -117,13 +117,13 @@ non-<code>Ord</code> types and more general comparisons.</p>
 <span class='kw'>let</span> <span class='kw-2'>mut</span> <span class='ident'>v</span> <span class='op'>=</span> [<span class='ident'>Foo</span>(<span class='number'>4</span>), <span class='ident'>Foo</span>(<span class='number'>1</span>), <span class='ident'>Foo</span>(<span class='number'>3</span>), <span class='ident'>Foo</span>(<span class='number'>2</span>), <span class='ident'>Foo</span>(<span class='number'>0</span>)];
 
 <span class='macro'>println</span><span class='macro'>!</span>(<span class='string'>&quot;{:?}&#39;s field is close to the median of the fields&quot;</span>,
-        <span class='ident'>order_stat</span>::<span class='ident'>median_of_medians_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='number'>0</span>.<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='ident'>y</span>.<span class='number'>0</span>)).<span class='number'>1</span>);</pre>
+        <span class='ident'>order_stat</span>::<span class='ident'>median_of_medians_by</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>v</span>, <span class='op'>|</span><span class='ident'>x</span>, <span class='ident'>y</span><span class='op'>|</span> <span class='ident'>x</span>.<span class='number'>0</span>.<span class='ident'>cmp</span>(<span class='kw-2'>&amp;</span><span class='ident'>y</span>.<span class='number'>0</span>)).<span class='number'>1</span>);<a class='test-arrow' target='_blank' href=''>Run</a></pre>
 </div><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.kth.html'
                                   title='order_stat::kth'>kth</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Compute the <code>k</code>th order statistic (<code>k</code>th smallest element) of
 <code>array</code> via the Floyd-Rivest Algorithm[1].</p>
                            </td>
@@ -131,7 +131,7 @@ non-<code>Ord</code> types and more general comparisons.</p>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.kth_by.html'
                                   title='order_stat::kth_by'>kth_by</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Compute the element that is the <code>k</code>th order statistic in the
 ordering defined by <code>cmp</code> (that is, the <code>k</code>th element of <code>array.sort_by(cmp)</code>).</p>
                            </td>
@@ -139,14 +139,14 @@ ordering defined by <code>cmp</code> (that is, the <code>k</code>th element of <
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.median_of_medians.html'
                                   title='order_stat::median_of_medians'>median_of_medians</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Calculate an approximate median of <code>array</code>.</p>
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class='fn' href='fn.median_of_medians_by.html'
                                   title='order_stat::median_of_medians_by'>median_of_medians_by</a></td>
-                           <td class='docblock short'>
+                           <td class='docblock-short'>
                                 <p>Calculate an approximate median of <code>array</code>, using the ordering
 defined by <code>cmp</code>.</p>
                            </td>

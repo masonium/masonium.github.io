@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-786' class='srclink' href='../../src/linxal/least_squares.rs.html#12-28' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-774' class='srclink' href='../../src/linxal/least_squares.rs.html#12-28' title='goto source code'>[src]</a></span></h1>
 <pre class='rust enum'>pub enum LeastSquaresError {
     BadLayout,
     InconsistentLayout,
@@ -55,14 +55,14 @@
     Degenerate,
     IllegalParameter(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>),
 }</pre><h2 class='variants'>Variants</h2>
-<span id='variant.BadLayout' class='variant'><code>BadLayout</code></span><div class='docblock'><p>One of the matrices has an invalid layout.</p>
-</div><span id='variant.InconsistentLayout' class='variant'><code>InconsistentLayout</code></span><div class='docblock'><p>Matrix <code>a</code> and <code>b</code> have inconsistent layouts (i.e. row
+<span id='variant.BadLayout' class='variant'><span id='BadLayout.v' class='invisible'><code>BadLayout</code></span></span><div class='docblock'><p>One of the matrices has an invalid layout.</p>
+</div><span id='variant.InconsistentLayout' class='variant'><span id='InconsistentLayout.v' class='invisible'><code>InconsistentLayout</code></span></span><div class='docblock'><p>Matrix <code>a</code> and <code>b</code> have inconsistent layouts (i.e. row
 vs. column-major)</p>
-</div><span id='variant.InconsistentDimensions' class='variant'><code>InconsistentDimensions(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></span><div class='docblock'><p><code>a</code> and <code>b</code> have different numbers of rows.</p>
-</div><span id='variant.Degenerate' class='variant'><code>Degenerate</code></span><div class='docblock'><p><code>a</code> is not full rank</p>
-</div><span id='variant.IllegalParameter' class='variant'><code>IllegalParameter(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>)</code></span><div class='docblock'><p>Should never happend.</p>
-</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../linxal/least_squares/enum.LeastSquaresError.html' title='linxal::least_squares::LeastSquaresError'>LeastSquaresError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-774' class='srclink' href='../../src/linxal/least_squares.rs.html#11' title='goto source code'>[src]</a></span></h3>
-<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+</div><span id='variant.InconsistentDimensions' class='variant'><span id='InconsistentDimensions.v' class='invisible'><code>InconsistentDimensions(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>)</code></span></span><div class='docblock'><p><code>a</code> and <code>b</code> have different numbers of rows.</p>
+</div><span id='variant.Degenerate' class='variant'><span id='Degenerate.v' class='invisible'><code>Degenerate</code></span></span><div class='docblock'><p><code>a</code> is not full rank</p>
+</div><span id='variant.IllegalParameter' class='variant'><span id='IllegalParameter.v' class='invisible'><code>IllegalParameter(<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.i32.html'>i32</a>)</code></span></span><div class='docblock'><p>Should never happend.</p>
+</div><h2 id='implementations'>Trait Implementations</h2><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='enum' href='../../linxal/least_squares/enum.LeastSquaresError.html' title='linxal::least_squares::LeastSquaresError'>LeastSquaresError</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-783' class='srclink' href='../../src/linxal/least_squares.rs.html#11' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><span id='fmt.v' class='invisible'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></span></h4>
 <div class='docblock'><p>Formats the value using the given formatter.</p>
 </div></div></section>
     <section id='search' class="content hidden"></section>

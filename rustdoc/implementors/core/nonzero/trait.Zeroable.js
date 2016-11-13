@@ -1,5 +1,5 @@
 (function() {var implementors = {};
-implementors["either"] = [];implementors["libc"] = [];implementors["linxal"] = [];implementors["linxal"] = [];implementors["linxal"] = [];implementors["linxal"] = [];implementors["linxal"] = [];
+implementors["either"] = [];implementors["itertools"] = [];implementors["num"] = [];implementors["linxal"] = [];implementors["drav"] = [];
 
             if (window.register_implementors) {
                 window.register_implementors(implementors);

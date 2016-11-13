@@ -47,7 +47,7 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-27694' class='srclink' href='../src/nalgebra/traits/geometry.rs.html#228-263' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-27530' class='srclink' href='../src/nalgebra/traits/geometry.rs.html#228-263' title='goto source code'>[src]</a></span></h1>
 <pre class='rust trait'>pub trait Norm: <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a> {
     type <a href='#associatedtype.NormType' class='type'>NormType</a>: <a class='trait' href='../nalgebra/trait.BaseFloat.html' title='nalgebra::BaseFloat'>BaseFloat</a>;
     fn <a href='#tymethod.norm_squared' class='fnname'>norm_squared</a>(&amp;self) -&gt; Self::NormType;
@@ -61,30 +61,30 @@
 </div>
             <h2 id='associated-types'>Associated Types</h2>
             <div class='methods'>
-        <h3 id='associatedtype.NormType' class='method stab '><code>type <a href='#associatedtype.NormType' class='type'>NormType</a>: <a class='trait' href='../nalgebra/trait.BaseFloat.html' title='nalgebra::BaseFloat'>BaseFloat</a></code></h3><div class='docblock'><p>The scalar type for the norm (i.e. the undelying field).</p>
+        <h3 id='associatedtype.NormType' class='method stab '><span id='NormType.t' class='invisible'><code>type <a href='#associatedtype.NormType' class='type'>NormType</a>: <a class='trait' href='../nalgebra/trait.BaseFloat.html' title='nalgebra::BaseFloat'>BaseFloat</a></code></span></h3><div class='docblock'><p>The scalar type for the norm (i.e. the undelying field).</p>
 </div></div>
             <h2 id='required-methods'>Required Methods</h2>
             <div class='methods'>
-        <h3 id='tymethod.norm_squared' class='method stab '><code>fn <a href='#tymethod.norm_squared' class='fnname'>norm_squared</a>(&amp;self) -&gt; Self::NormType</code></h3><div class='docblock'><p>Computes the squared norm of <code>self</code>.</p>
+        <h3 id='tymethod.norm_squared' class='method stab '><span id='norm_squared.v' class='invisible'><code>fn <a href='#tymethod.norm_squared' class='fnname'>norm_squared</a>(&amp;self) -&gt; Self::NormType</code></span></h3><div class='docblock'><p>Computes the squared norm of <code>self</code>.</p>
 
 <p>This is usually faster than computing the norm itself.</p>
-</div><h3 id='tymethod.normalize' class='method stab '><code>fn <a href='#tymethod.normalize' class='fnname'>normalize</a>(&amp;self) -&gt; Self</code></h3><div class='docblock'><p>Gets the normalized version of a copy of <code>v</code>.</p>
+</div><h3 id='tymethod.normalize' class='method stab '><span id='normalize.v' class='invisible'><code>fn <a href='#tymethod.normalize' class='fnname'>normalize</a>(&amp;self) -&gt; Self</code></span></h3><div class='docblock'><p>Gets the normalized version of a copy of <code>v</code>.</p>
 
 <p>Might return an invalid result if the vector is zero or close to zero.</p>
-</div><h3 id='tymethod.normalize_mut' class='method stab '><code>fn <a href='#tymethod.normalize_mut' class='fnname'>normalize_mut</a>(&amp;mut self) -&gt; Self::NormType</code></h3><div class='docblock'><p>Normalizes <code>self</code>.</p>
+</div><h3 id='tymethod.normalize_mut' class='method stab '><span id='normalize_mut.v' class='invisible'><code>fn <a href='#tymethod.normalize_mut' class='fnname'>normalize_mut</a>(&amp;mut self) -&gt; Self::NormType</code></span></h3><div class='docblock'><p>Normalizes <code>self</code>.</p>
 
 <p>The result might be invalid if the vector is zero or close to zero.</p>
-</div><h3 id='tymethod.try_normalize' class='method stab '><code>fn <a href='#tymethod.try_normalize' class='fnname'>try_normalize</a>(&amp;self, min_norm: Self::NormType) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;Self&gt;</code></h3><div class='docblock'><p>Gets the normalized version of a copy of <code>v</code> or <code>None</code> if the vector has a norm smaller
+</div><h3 id='tymethod.try_normalize' class='method stab '><span id='try_normalize.v' class='invisible'><code>fn <a href='#tymethod.try_normalize' class='fnname'>try_normalize</a>(&amp;self, min_norm: Self::NormType) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;Self&gt;</code></span></h3><div class='docblock'><p>Gets the normalized version of a copy of <code>v</code> or <code>None</code> if the vector has a norm smaller
 or equal to <code>min_norm</code>. In particular, <code>.try_normalize(0.0)</code> returns <code>None</code> if the norm is
 exactly zero.</p>
-</div><h3 id='tymethod.try_normalize_mut' class='method stab '><code>fn <a href='#tymethod.try_normalize_mut' class='fnname'>try_normalize_mut</a>(&amp;mut self, min_norm: Self::NormType) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;Self::NormType&gt;</code></h3><div class='docblock'><p>Normalized <code>v</code> or does nothing if the vector has a norm smaller
+</div><h3 id='tymethod.try_normalize_mut' class='method stab '><span id='try_normalize_mut.v' class='invisible'><code>fn <a href='#tymethod.try_normalize_mut' class='fnname'>try_normalize_mut</a>(&amp;mut self, min_norm: Self::NormType) -&gt; <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;Self::NormType&gt;</code></span></h3><div class='docblock'><p>Normalized <code>v</code> or does nothing if the vector has a norm smaller
 or equal to <code>min_norm</code>.</p>
 
 <p>Returns the old norm or <code>None</code> if the normalization failed.</p>
 </div></div>
             <h2 id='provided-methods'>Provided Methods</h2>
             <div class='methods'>
-        <h3 id='method.norm' class='method stab '><code>fn <a href='#method.norm' class='fnname'>norm</a>(&amp;self) -&gt; Self::NormType</code></h3><div class='docblock'><p>Computes the norm of <code>self</code>.</p>
+        <h3 id='method.norm' class='method stab '><span id='norm.v' class='invisible'><code>fn <a href='#method.norm' class='fnname'>norm</a>(&amp;self) -&gt; Self::NormType</code></span></h3><div class='docblock'><p>Computes the norm of <code>self</code>.</p>
 </div></div>
         <h2 id='implementors'>Implementors</h2>
         <ul class='item-list' id='implementors-list'>
