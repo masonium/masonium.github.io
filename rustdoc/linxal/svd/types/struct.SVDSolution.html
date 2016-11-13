@@ -47,11 +47,11 @@
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a id='src-472' class='srclink' href='../../../src/linxal/svd/types.rs.html#19-33' title='goto source code'>[src]</a></span></h1>
+               </span><a id='src-600' class='srclink' href='../../../src/linxal/svd/types.rs.html#20-34' title='goto source code'>[src]</a></span></h1>
 <pre class='rust struct'>pub struct SVDSolution&lt;IV:&nbsp;<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>,&nbsp;SV:&nbsp;<a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Sized.html' title='core::marker::Sized'>Sized</a>&gt; {
-    pub values: <a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;SV,&nbsp;<a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a>&gt;,
-    pub left_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a>, <a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;&gt;,
-    pub right_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a>, <a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;&gt;,
+    pub values: <a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;SV,&nbsp;<a class='type' href='../../../ndarray/aliases/type.Ix1.html' title='ndarray::aliases::Ix1'>Ix1</a>&gt;,
+    pub left_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='type' href='../../../ndarray/aliases/type.Ix2.html' title='ndarray::aliases::Ix2'>Ix2</a>&gt;&gt;,
+    pub right_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='type' href='../../../ndarray/aliases/type.Ix2.html' title='ndarray::aliases::Ix2'>Ix2</a>&gt;&gt;,
 }</pre><div class='docblock'><p>A solution to the singular value decomposition.</p>
 
 <p>A singular value decomposition solution includes singular values
@@ -59,18 +59,18 @@ and, optionally, the left and right singular vectors, stored as a
 mtrix.</p>
 </div><h2 class='fields'>Fields</h2><span id='structfield.values' class='structfield'>
                            <span id='values.v' class='invisible'>
-                           <code>values: <a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;SV,&nbsp;<a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a>&gt;</code>
+                           <code>values: <a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;SV,&nbsp;<a class='type' href='../../../ndarray/aliases/type.Ix1.html' title='ndarray::aliases::Ix1'>Ix1</a>&gt;</code>
                            </span></span><span class='stab '></span><div class='docblock'><p>Singular values of the matrix.</p>
 
 <p>Singular values, which are guaranteed to be non-negative
 reals, are returned in descending order.</p>
 </div><span id='structfield.left_vectors' class='structfield'>
                            <span id='left_vectors.v' class='invisible'>
-                           <code>left_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a>, <a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;&gt;</code>
+                           <code>left_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='type' href='../../../ndarray/aliases/type.Ix2.html' title='ndarray::aliases::Ix2'>Ix2</a>&gt;&gt;</code>
                            </span></span><span class='stab '></span><div class='docblock'><p>The matrix <code>U</code> of left singular vectors.</p>
 </div><span id='structfield.right_vectors' class='structfield'>
                            <span id='right_vectors.v' class='invisible'>
-                           <code>right_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>(</a><a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a>, <a class='type' href='../../../ndarray/type.Ix.html' title='ndarray::Ix'>Ix</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.tuple.html'>)</a>&gt;&gt;</code>
+                           <code>right_vectors: <a class='enum' href='https://doc.rust-lang.org/nightly/core/option/enum.Option.html' title='core::option::Option'>Option</a>&lt;<a class='type' href='../../../ndarray/type.Array.html' title='ndarray::Array'>Array</a>&lt;IV,&nbsp;<a class='type' href='../../../ndarray/aliases/type.Ix2.html' title='ndarray::aliases::Ix2'>Ix2</a>&gt;&gt;</code>
                            </span></span><span class='stab '></span><div class='docblock'><p>The matrix V<sup>t</sup> of singular vectors.</p>
 
 <p>The transpose of V is stored, not V itself.</p>

@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["SymEigen",""]]});
+initSidebarItems({"trait":[["SymEigen","Scalar trait for computing eigenvalues of a symmetric matrix."]]});

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/svd/types.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.3.0/src/svd/types.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>types.rs.html -- source</title>
@@ -83,10 +83,12 @@
 <span id="39">39</span>
 <span id="40">40</span>
 <span id="41">41</span>
+<span id="42">42</span>
 </pre><pre class='rust '>
 <span class='kw'>use</span> <span class='ident'>ndarray</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='ident'>num_traits</span>::{<span class='ident'>Float</span>, <span class='ident'>ToPrimitive</span>};
 <span class='kw'>use</span> <span class='ident'>std</span>::<span class='ident'>fmt</span>::<span class='ident'>Display</span>;
+<span class='kw'>use</span> <span class='ident'>ndarray</span>::{<span class='ident'>Ix1</span>, <span class='ident'>Ix2</span>};
 
 <span class='doccomment'>/// Trait for singular values</span>
 <span class='doccomment'>///</span>
@@ -107,15 +109,15 @@
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// Singular values, which are guaranteed to be non-negative</span>
     <span class='doccomment'>/// reals, are returned in descending order.</span>
-    <span class='kw'>pub</span> <span class='ident'>values</span>: <span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>SV</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>values</span>: <span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>SV</span>, <span class='ident'>Ix1</span><span class='op'>&gt;</span>,
 
     <span class='doccomment'>/// The matrix `U` of left singular vectors.</span>
-    <span class='kw'>pub</span> <span class='ident'>left_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, (<span class='ident'>Ix</span>, <span class='ident'>Ix</span>)<span class='op'>&gt;&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>left_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, <span class='ident'>Ix2</span><span class='op'>&gt;&gt;</span>,
 
     <span class='doccomment'>/// The matrix V^t of singular vectors.</span>
     <span class='doccomment'>///</span>
     <span class='doccomment'>/// The transpose of V is stored, not V itself.</span>
-    <span class='kw'>pub</span> <span class='ident'>right_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, (<span class='ident'>Ix</span>, <span class='ident'>Ix</span>)<span class='op'>&gt;&gt;</span>,
+    <span class='kw'>pub</span> <span class='ident'>right_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, <span class='ident'>Ix2</span><span class='op'>&gt;&gt;</span>,
 }
 
 <span class='doccomment'>/// An error resulting from a `SVD::compute*` method.</span>

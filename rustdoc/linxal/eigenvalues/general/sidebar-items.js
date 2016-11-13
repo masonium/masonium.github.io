@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Eigen",""]]});
+initSidebarItems({"trait":[["Eigen","Scalar trait for computing eigenvalues."]]});

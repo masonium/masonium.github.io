@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/eigenvalues/symmetric.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.3.0/src/eigenvalues/symmetric.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>symmetric.rs.html -- source</title>
@@ -146,15 +146,35 @@
 <span id="102">102</span>
 <span id="103">103</span>
 <span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Compute eigenvalues and eigenvectors of symmetric matrices.</span>
+<span class='doccomment'>//!</span>
+<span class='doccomment'>//! Symmetric (or Hermitian, for complex) matrices are guaranteed to</span>
+<span class='doccomment'>//! have real eigenvalues.</span>
 
 <span class='kw'>use</span> <span class='ident'>lapack</span>::<span class='ident'>c</span>::{<span class='ident'>ssyev</span>, <span class='ident'>dsyev</span>, <span class='ident'>cheev</span>, <span class='ident'>zheev</span>};
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>types</span>::{<span class='ident'>Solution</span>, <span class='ident'>EigenError</span>};
 <span class='kw'>use</span> <span class='ident'>impl_prelude</span>::<span class='op'>*</span>;
 
+<span class='doccomment'>/// Scalar trait for computing eigenvalues of a symmetric matrix.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// In order to extract eigenvalues or eigenvectors from a matrix,</span>
+<span class='doccomment'>/// that matrix with must have  entries implementing the `Eigen` trait.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>SymEigen</span>: <span class='ident'>Sized</span> {
-    <span class='kw'>type</span> <span class='ident'>SingularValue</span>;
+    <span class='doccomment'>/// Scalar type of the resulting eigenvalues.</span>
+    <span class='kw'>type</span> <span class='ident'>Eigenvalue</span>;
+
+    <span class='doccomment'>/// Solution structure from the eigenvalue computation.</span>
     <span class='kw'>type</span> <span class='ident'>Solution</span>;
 
     <span class='doccomment'>/// Return the real eigenvalues of a symmetric matrix.</span>
@@ -164,13 +184,13 @@
     <span class='kw'>fn</span> <span class='ident'>compute_mut</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>mat</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
                       <span class='ident'>uplo</span>: <span class='ident'>Symmetric</span>,
                       <span class='ident'>with_vectors</span>: <span class='ident'>bool</span>)
-                      <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>SingularValue</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>, <span class='ident'>EigenError</span><span class='op'>&gt;</span>
+                      <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>Eigenvalue</span>, <span class='ident'>Ix1</span><span class='op'>&gt;</span>, <span class='ident'>EigenError</span><span class='op'>&gt;</span>
         <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span>;
 
     <span class='doccomment'>/// Return the real eigenvalues of a symmetric matrix.</span>
     <span class='kw'>fn</span> <span class='ident'>compute_into</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>mat</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
                        <span class='ident'>uplo</span>: <span class='ident'>Symmetric</span>)
-                       <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>SingularValue</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>, <span class='ident'>EigenError</span><span class='op'>&gt;</span>
+                       <span class='op'>-&gt;</span> <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>Eigenvalue</span>, <span class='ident'>Ix1</span><span class='op'>&gt;</span>, <span class='ident'>EigenError</span><span class='op'>&gt;</span>
         <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> <span class='op'>+</span> <span class='ident'>DataOwned</span><span class='op'>&lt;</span><span class='ident'>Elem</span> <span class='op'>=</span> <span class='self'>Self</span><span class='op'>&gt;</span> {
         <span class='self'>Self</span>::<span class='ident'>compute_mut</span>(<span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>mat</span>, <span class='ident'>uplo</span>, <span class='bool-val'>false</span>)
     }
@@ -191,11 +211,11 @@
 <span class='macro'>macro_rules</span><span class='macro'>!</span> <span class='ident'>impl_sym_eigen</span> {
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>eigen_type</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>:<span class='ident'>ident</span>) <span class='op'>=&gt;</span> (
         <span class='kw'>impl</span> <span class='ident'>SymEigen</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span> {
-            <span class='kw'>type</span> <span class='ident'>SingularValue</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>eigen_type</span>;
-            <span class='kw'>type</span> <span class='ident'>Solution</span> <span class='op'>=</span> <span class='ident'>Solution</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='self'>Self</span>::<span class='ident'>SingularValue</span><span class='op'>&gt;</span>;
+            <span class='kw'>type</span> <span class='ident'>Eigenvalue</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>eigen_type</span>;
+            <span class='kw'>type</span> <span class='ident'>Solution</span> <span class='op'>=</span> <span class='ident'>Solution</span><span class='op'>&lt;</span><span class='self'>Self</span>, <span class='self'>Self</span>::<span class='ident'>Eigenvalue</span><span class='op'>&gt;</span>;
 
             <span class='kw'>fn</span> <span class='ident'>compute_mut</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='ident'>mat</span>: <span class='kw-2'>&amp;</span><span class='kw-2'>mut</span> <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>, <span class='ident'>uplo</span>: <span class='ident'>Symmetric</span>, <span class='ident'>with_vectors</span>: <span class='ident'>bool</span>) <span class='op'>-&gt;</span>
-                <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>SingularValue</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>, <span class='ident'>EigenError</span><span class='op'>&gt;</span>
+                <span class='prelude-ty'>Result</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='self'>Self</span>::<span class='ident'>Eigenvalue</span>, <span class='ident'>Ix1</span><span class='op'>&gt;</span>, <span class='ident'>EigenError</span><span class='op'>&gt;</span>
                 <span class='kw'>where</span> <span class='ident'>D</span>: <span class='ident'>DataMut</span><span class='op'>&lt;</span><span class='ident'>Elem</span><span class='op'>=</span><span class='self'>Self</span><span class='op'>&gt;</span>
             {
                 <span class='kw'>let</span> <span class='ident'>dim</span> <span class='op'>=</span> <span class='ident'>mat</span>.<span class='ident'>dim</span>();
@@ -219,7 +239,7 @@
                 <span class='kw'>if</span> <span class='ident'>info</span>  <span class='op'>==</span> <span class='number'>0</span> {
                     <span class='prelude-val'>Ok</span>(<span class='ident'>values</span>)
                 } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>info</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
-                    <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>BadParameter</span>(<span class='op'>-</span><span class='ident'>info</span>))
+                    <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>IllegalParameter</span>(<span class='op'>-</span><span class='ident'>info</span>))
                 } <span class='kw'>else</span> {
                     <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>Failed</span>)
                 }

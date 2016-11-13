@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/eigenvalues/types.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.3.0/src/eigenvalues/types.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>types.rs.html -- source</title>
@@ -63,27 +63,67 @@
 <span id="19">19</span>
 <span id="20">20</span>
 <span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
 </pre><pre class='rust '>
+<span class='doccomment'>//! Error and solution types for eigenvalue problems.</span>
+
 <span class='kw'>use</span> <span class='ident'>ndarray</span>::<span class='ident'>prelude</span>::<span class='op'>*</span>;
+<span class='kw'>use</span> <span class='ident'>ndarray</span>::{<span class='ident'>Ix1</span>, <span class='ident'>Ix2</span>};
 
 <span class='doccomment'>/// Errors from an eigenvalue problem.</span>
-<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>)]</span>
+<span class='attribute'>#[<span class='ident'>derive</span>(<span class='ident'>Debug</span>, <span class='ident'>Clone</span>, <span class='ident'>PartialEq</span>, <span class='ident'>Eq</span>)]</span>
 <span class='kw'>pub</span> <span class='kw'>enum</span> <span class='ident'>EigenError</span> {
+    <span class='doccomment'>/// The input matrix is not square.</span>
     <span class='ident'>NotSquare</span>,
+
+    <span class='doccomment'>/// The input matrix does not have a conforming layout.</span>
     <span class='ident'>BadLayout</span>,
-    <span class='ident'>BadParameter</span>(<span class='ident'>i32</span>),
+
+    <span class='doccomment'>/// The parameter to the LAPACKE method was invalid.</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// This error should not occur in user-facing code.</span>
+    <span class='ident'>IllegalParameter</span>(<span class='ident'>i32</span>),
+
+    <span class='doccomment'>/// Eigenvalues could not be found.</span>
     <span class='ident'>Failed</span>,
 }
 
-<span class='doccomment'>/// Solution to an eigenvalue problem..</span>
+<span class='doccomment'>/// Solution to an eigenvalue problem.</span>
 <span class='doccomment'>///</span>
 <span class='doccomment'>/// Contains thte eigenvalues and, optionally, the left and/or right</span>
 <span class='doccomment'>/// eigenvectors of the solution. For symmetric problems, the</span>
 <span class='doccomment'>/// eigenvectors are placed in `right_eigenvectors`.</span>
 <span class='kw'>pub</span> <span class='kw'>struct</span> <span class='ident'>Solution</span><span class='op'>&lt;</span><span class='ident'>IV</span>, <span class='ident'>EV</span><span class='op'>&gt;</span> {
-    <span class='kw'>pub</span> <span class='ident'>values</span>: <span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>EV</span>, <span class='ident'>Ix</span><span class='op'>&gt;</span>,
-    <span class='kw'>pub</span> <span class='ident'>left_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, (<span class='ident'>Ix</span>, <span class='ident'>Ix</span>)<span class='op'>&gt;&gt;</span>,
-    <span class='kw'>pub</span> <span class='ident'>right_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, (<span class='ident'>Ix</span>, <span class='ident'>Ix</span>)<span class='op'>&gt;&gt;</span>,
+    <span class='doccomment'>/// Eigenvalues of the matrix.</span>
+    <span class='kw'>pub</span> <span class='ident'>values</span>: <span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>EV</span>, <span class='ident'>Ix1</span><span class='op'>&gt;</span>,
+
+    <span class='doccomment'>/// Eigenvectors for the left-eigenvalue problem ($x^H A = \lambda x^H$)</span>
+    <span class='kw'>pub</span> <span class='ident'>left_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, <span class='ident'>Ix2</span><span class='op'>&gt;&gt;</span>,
+
+    <span class='doccomment'>/// Eigenvectors for the right-eigenvalue problem ($Ax = \lambda x$)</span>
+    <span class='doccomment'>///</span>
+    <span class='doccomment'>/// For symmetric eigenvalue problems, the eigenvectors will be stored</span>
+    <span class='doccomment'>/// in `right_vectors`.</span>
+    <span class='kw'>pub</span> <span class='ident'>right_vectors</span>: <span class='prelude-ty'>Option</span><span class='op'>&lt;</span><span class='ident'>Array</span><span class='op'>&lt;</span><span class='ident'>IV</span>, <span class='ident'>Ix2</span><span class='op'>&gt;&gt;</span>,
 }
 </pre>
 </section>

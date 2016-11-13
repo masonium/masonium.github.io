@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="rustdoc">
-    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.2.0/src/eigenvalues/general.rs`.">
+    <meta name="description" content="Source to the Rust file `/home/mason/.cargo/registry/src/github.com-1ecc6299db9ec823/linxal-0.3.0/src/eigenvalues/general.rs`.">
     <meta name="keywords" content="rust, rustlang, rust-lang">
 
     <title>general.rs.html -- source</title>
@@ -191,14 +191,28 @@
 <span id="147">147</span>
 <span id="148">148</span>
 <span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
 </pre><pre class='rust '>
 <span class='doccomment'>//! Compute eigenvalues and eigenvectors of general, non-symmetric matrices.</span>
 <span class='kw'>use</span> <span class='ident'>lapack</span>::<span class='ident'>c</span>::{<span class='ident'>sgeev</span>, <span class='ident'>dgeev</span>, <span class='ident'>cgeev</span>, <span class='ident'>zgeev</span>};
 <span class='kw'>use</span> <span class='ident'>impl_prelude</span>::<span class='op'>*</span>;
 <span class='kw'>use</span> <span class='kw'>super</span>::<span class='ident'>types</span>::{<span class='ident'>EigenError</span>, <span class='ident'>Solution</span>};
 
+<span class='doccomment'>/// Scalar trait for computing eigenvalues.</span>
+<span class='doccomment'>///</span>
+<span class='doccomment'>/// In order to extract eigenvalues or eigenvectors from a matrix,</span>
+<span class='doccomment'>/// that matrix with must have  entries implementing the `Eigen` trait.</span>
 <span class='kw'>pub</span> <span class='kw'>trait</span> <span class='ident'>Eigen</span>: <span class='ident'>Sized</span> <span class='op'>+</span> <span class='ident'>Clone</span> {
-    <span class='kw'>type</span> <span class='ident'>Eigv</span>;
+    <span class='doccomment'>/// The type of the eigenvalues.</span>
+    <span class='kw'>type</span> <span class='ident'>EigenValue</span>;
+
+    <span class='doccomment'>/// The solution structure of the eigenvalue computation.</span>
     <span class='kw'>type</span> <span class='ident'>Solution</span>;
 
     <span class='doccomment'>/// Return the eigenvalues and, optionally, the left and/or right</span>
@@ -230,7 +244,7 @@
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>eigv_type</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>:<span class='ident'>ident</span>)  <span class='op'>=&gt;</span> (
         <span class='kw'>impl</span> <span class='ident'>Eigen</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span> {
 
-            <span class='kw'>type</span> <span class='ident'>Eigv</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>eigv_type</span>;
+            <span class='kw'>type</span> <span class='ident'>EigenValue</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>eigv_type</span>;
             <span class='kw'>type</span> <span class='ident'>Solution</span> <span class='op'>=</span> <span class='ident'>Solution</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>eigv_type</span><span class='op'>&gt;</span>;
 
             <span class='kw'>fn</span> <span class='ident'>compute_into</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>mat</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
@@ -265,13 +279,13 @@
 
                 <span class='kw'>if</span> <span class='ident'>info</span> <span class='op'>==</span> <span class='number'>0</span> {
                     <span class='kw'>let</span> <span class='ident'>vals</span>: <span class='ident'>Vec</span><span class='op'>&lt;</span>_<span class='op'>&gt;</span> <span class='op'>=</span> <span class='ident'>values_real</span>.<span class='ident'>iter</span>().<span class='ident'>zip</span>(<span class='ident'>values_imag</span>.<span class='ident'>iter</span>())
-                        .<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>x</span>, <span class='ident'>y</span>)<span class='op'>|</span> <span class='self'>Self</span>::<span class='ident'>Eigv</span>::<span class='ident'>new</span>(<span class='op'>*</span><span class='ident'>x</span>, <span class='op'>*</span><span class='ident'>y</span>)).<span class='ident'>collect</span>();
+                        .<span class='ident'>map</span>(<span class='op'>|</span>(<span class='ident'>x</span>, <span class='ident'>y</span>)<span class='op'>|</span> <span class='self'>Self</span>::<span class='ident'>EigenValue</span>::<span class='ident'>new</span>(<span class='op'>*</span><span class='ident'>x</span>, <span class='op'>*</span><span class='ident'>y</span>)).<span class='ident'>collect</span>();
                     <span class='prelude-val'>Ok</span>(<span class='ident'>Solution</span> {
                         <span class='ident'>values</span>: <span class='ident'>ArrayBase</span>::<span class='ident'>from_vec</span>(<span class='ident'>vals</span>),
                         <span class='ident'>left_vectors</span>: <span class='kw'>if</span> <span class='ident'>compute_left</span> { <span class='prelude-val'>Some</span>(<span class='ident'>vl</span>) } <span class='kw'>else</span> { <span class='prelude-val'>None</span> },
                         <span class='ident'>right_vectors</span>: <span class='kw'>if</span> <span class='ident'>compute_right</span> { <span class='prelude-val'>Some</span>(<span class='ident'>vr</span>) } <span class='kw'>else</span> { <span class='prelude-val'>None</span> }})
                 } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>info</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
-                    <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>BadParameter</span>(<span class='op'>-</span><span class='ident'>info</span>))
+                    <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>IllegalParameter</span>(<span class='op'>-</span><span class='ident'>info</span>))
                 } <span class='kw'>else</span> {
                     <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>Failed</span>)
                 }
@@ -287,7 +301,7 @@
     (<span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>:<span class='ident'>ident</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>func</span>:<span class='ident'>ident</span>)  <span class='op'>=&gt;</span> (
         <span class='kw'>impl</span> <span class='ident'>Eigen</span> <span class='kw'>for</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span> {
 
-            <span class='kw'>type</span> <span class='ident'>Eigv</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>;
+            <span class='kw'>type</span> <span class='ident'>EigenValue</span> <span class='op'>=</span> <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>;
             <span class='kw'>type</span> <span class='ident'>Solution</span> <span class='op'>=</span> <span class='ident'>Solution</span><span class='op'>&lt;</span><span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span>, <span class='macro-nonterminal'>$</span><span class='macro-nonterminal'>impl_type</span><span class='op'>&gt;</span>;
 
             <span class='kw'>fn</span> <span class='ident'>compute_into</span><span class='op'>&lt;</span><span class='ident'>D</span><span class='op'>&gt;</span>(<span class='kw-2'>mut</span> <span class='ident'>mat</span>: <span class='ident'>ArrayBase</span><span class='op'>&lt;</span><span class='ident'>D</span>, <span class='ident'>Ix2</span><span class='op'>&gt;</span>,
@@ -327,7 +341,7 @@
                         <span class='ident'>left_vectors</span>: <span class='kw'>if</span> <span class='ident'>compute_left</span> { <span class='prelude-val'>Some</span>(<span class='ident'>vl</span>) } <span class='kw'>else</span> { <span class='prelude-val'>None</span> },
                         <span class='ident'>right_vectors</span>: <span class='kw'>if</span> <span class='ident'>compute_right</span> { <span class='prelude-val'>Some</span>(<span class='ident'>vr</span>) } <span class='kw'>else</span> { <span class='prelude-val'>None</span> }})
                 } <span class='kw'>else</span> <span class='kw'>if</span> <span class='ident'>info</span> <span class='op'>&lt;</span> <span class='number'>0</span> {
-                    <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>BadParameter</span>(<span class='op'>-</span><span class='ident'>info</span>))
+                    <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>IllegalParameter</span>(<span class='op'>-</span><span class='ident'>info</span>))
                 } <span class='kw'>else</span> {
                     <span class='prelude-val'>Err</span>(<span class='ident'>EigenError</span>::<span class='ident'>Failed</span>)
                 }
